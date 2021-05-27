@@ -1,24 +1,70 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Colum           | Type   | Options      |
+| --------------- | ------ | ------------ |
+| n_name          | string | null: false  |
+| email           | string | unique: true |
+| pass            | string | null: false  |
+| pass con        | string | null: false  |
+| first_name      | string | null: false  |
+| last_name       | string | null: false  |
+| first_name kana | string | null: false  |
+| last_name kana  | string | null: false  |
+| year            | string | null: false  |
+| month           | string | null: false  |
+| day             | string | null: false  |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :products
+- has_many :purchase history
 
-* Configuration
+## productsテーブル
 
-* Database creation
+| Colum            | Type       | Options     |
+| ---------------- | ---------- | ----------- |
+| product_name     | string     | null: false |
+| description      | text       | null: false |
+| category         | string     | null: false |
+| condition        | string     | null: false |
+| shipping charges | string     | null: false |
+| shipping area    | string     | null: false |
+| day to ship      | string     | null: false |
+| price            | string     | null: false |
+| user             | references |             |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_one :purchase history
+- belongs_to :products
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchase historyテーブル
 
-* Deployment instructions
+| Colum   | Type       | Options |
+| ------- | ---------- | ------- |
+| user    | references |         |
+| product | references |         |
 
-* ...
+### Association
+
+- belongs_to :users
+- has_one :products
+- has_one :postal codes
+
+## postal codesテーブル
+
+| Colum            | Type       | Options     |
+| ---------------- | ---------- | ----------- |
+| postal code      | string     | null: false |
+| prefectures      | string     | null: false |
+| city             | string     | null: false |
+| address          | string     | null: false |
+| building name    | string     |             |
+| tel              | string     | null: false |
+| purchase history | references |             |
+
+### Association
+
+-has_one :purchase history
