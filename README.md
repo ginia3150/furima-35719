@@ -9,14 +9,14 @@
 | encrypted_password     | string | null: false               |
 | first_name             | string | null: false               |
 | last_name              | string | null: false               |
-| first_name kana        | string | null: false               |
-| last_name kana         | string | null: false               |
+| first_name_kana        | string | null: false               |
+| last_name_kana         | string | null: false               |
 | birthday               | date   | null: false               |
 
 ### Association
 
 - has_many :products
-- has_many :purchase historys
+- has_many :purchase_historys
 
 ## productsテーブル
 
@@ -26,18 +26,18 @@
 | description        | text       | null: false                    |
 | category_id        | integer    | null: false                    |
 | condition_id       | integer    | null: false                    |
-| shipping charge_id | integer    | null: false                    |
-| shipping area_id   | integer    | null: false                    |
-| day to ship_id     | integer    | null: false                    |
+| shipping_charge_id | integer    | null: false                    |
+| shipping_area_id   | integer    | null: false                    |
+| day_to_ship_id     | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :purchase history
+- has_one :purchase_history
 - belongs_to :user
 
-## purchase historysテーブル
+## purchase_historysテーブル
 
 | Colum   | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
@@ -48,20 +48,20 @@
 
 - belongs_to :user
 - belongs_to :product
-- has_one :postal code
+- has_one :postal_code
 
-## postal codesテーブル
+## postal_codesテーブル
 
 | Colum            | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| postal code      | string     | null: false                    |
+| postal_code      | string     | null: false                    |
 | prefectures      | string     | null: false                    |
 | city             | string     | null: false                    |
 | address          | string     | null: false                    |
-| building name    | string     |                                |
+| building_name    | string     |                                |
 | tel              | string     | null: false                    |
-| purchase history | references | null: false, foreign_key: true |
+| purchase_history | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :purchase history
+- belongs_to :purchase_history
