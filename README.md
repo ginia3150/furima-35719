@@ -7,7 +7,6 @@
 | n_name                 | string | null: false               |
 | email                  | string | null: false, unique: true |
 | encrypted_password     | string | null: false               |
-| encrypted_password con | string | null: false               |
 | first_name             | string | null: false               |
 | last_name              | string | null: false               |
 | first_name kana        | string | null: false               |
@@ -17,7 +16,7 @@
 ### Association
 
 - has_many :products
-- has_many :purchase history
+- has_many :purchase historys
 
 ## productsテーブル
 
@@ -36,9 +35,9 @@
 ### Association
 
 - has_one :purchase history
-- belongs_to :users
+- belongs_to :user
 
-## purchase historyテーブル
+## purchase historysテーブル
 
 | Colum   | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
@@ -47,9 +46,9 @@
 
 ### Association
 
-- belongs_to :users
-- has_one :products
-- has_one :postal codes
+- belongs_to :user
+- belongs_to :product
+- has_one :postal code
 
 ## postal codesテーブル
 
@@ -65,4 +64,4 @@
 
 ### Association
 
--has_one :purchase history
+- belongs_to :purchase history
