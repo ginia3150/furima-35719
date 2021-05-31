@@ -8,11 +8,15 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :n_name
-    validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
-    validates :last_name, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
-    validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
-    validates :last_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
     validates :birthday
+      with_options format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ } do
+        validates :first_name
+        validates :last_name
+      end
+      with_options format: { with: /\A[ァ-ヶー－]+\z/ } do
+        validates :first_name_kana
+        validates :last_name_kana
+      end
   end
 
   # has_many :products
