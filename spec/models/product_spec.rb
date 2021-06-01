@@ -98,6 +98,11 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include('Day to ship must be other than 1')
       end
+      it 'userが存在しないと登録できない' do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include('User must exist')
+      end
     end
   end
 end
