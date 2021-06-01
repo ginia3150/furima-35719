@@ -19,6 +19,6 @@ class User < ApplicationRecord
       end
   end
 
-  # has_many :products
+  has_many :products
   # has_many :purchase_historys
 end
