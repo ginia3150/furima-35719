@@ -59,12 +59,12 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Price can't be blank")
       end
       it '販売価格が300円以下だと登録できない' do
-        @product.price = '123'
+        @product.price = 123
         @product.valid?
         expect(@product.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it '販売価格が9999999円以上では登録できない' do
-        @product.price = '1234567890'
+        @product.price = 1_234_567_890
         @product.valid?
         expect(@product.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
@@ -74,27 +74,27 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include('Price is not a number')
       end
       it 'カテゴリーが1以外でないと登録できない' do
-        @product.category_id = '1'
+        @product.category_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include('Category must be other than 1')
       end
       it '商品状態が1以外でないと登録できない' do
-        @product.condition_id = '1'
+        @product.condition_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include('Condition must be other than 1')
       end
       it '配送料の負担が1以外でないと登録できない' do
-        @product.shipping_charge_id = '1'
+        @product.shipping_charge_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include('Shipping charge must be other than 1')
       end
       it '発送元地域が1以外でないと登録できない' do
-        @product.shipping_area_id = '1'
+        @product.shipping_area_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include('Shipping area must be other than 1')
       end
       it '発送までの日数が1以外でないと登録できない' do
-        @product.day_to_ship_id = '1'
+        @product.day_to_ship_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include('Day to ship must be other than 1')
       end
