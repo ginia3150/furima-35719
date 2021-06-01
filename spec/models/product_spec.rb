@@ -73,6 +73,31 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include('Price is not a number')
       end
+      it 'カテゴリーが1以外でないと登録できない' do
+        @product.category_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Category must be other than 1')
+      end
+      it '商品状態が1以外でないと登録できない' do
+        @product.condition_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Condition must be other than 1')
+      end
+      it '配送料の負担が1以外でないと登録できない' do
+        @product.shipping_charge_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Shipping charge must be other than 1')
+      end
+      it '発送元地域が1以外でないと登録できない' do
+        @product.shipping_area_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Shipping area must be other than 1')
+      end
+      it '発送までの日数が1以外でないと登録できない' do
+        @product.day_to_ship_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Day to ship must be other than 1')
+      end
     end
   end
 end
