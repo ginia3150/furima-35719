@@ -26,7 +26,7 @@ class PurchaseHistorysController < ApplicationController
   end
 
   def pay_product
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(amount: @product.price, card: history_code_params[:token], currency: 'jpy')
   end
 
