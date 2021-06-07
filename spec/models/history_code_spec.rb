@@ -55,8 +55,33 @@ RSpec.describe HistoryCode, type: :model do
         @history_code.valid?
         expect(@history_code.errors.full_messages).to include('Postal code is invalid')
       end
-      it 'telは11桁以下でなければいけない' do
+      it 'telは12桁以上では登録できない' do
         @history_code.tel = '050123456789'
+        @history_code.valid?
+        expect(@history_code.errors.full_messages).to include('Tel is invalid')
+      end
+      it 'telは9桁以下では登録できない' do
+        @history_code.tel = '050123412'
+        @history_code.valid?
+        expect(@history_code.errors.full_messages).to include('Tel is invalid')
+      end
+      it 'telは英字では登録できない' do
+        @history_code.tel = 'hguroeuo'
+        @history_code.valid?
+        expect(@history_code.errors.full_messages).to include('Tel is invalid')
+      end
+      it 'telは半角英数字混合では登録できない' do
+        @history_code.tel = '0huodfs0'
+        @history_code.valid?
+        expect(@history_code.errors.full_messages).to include('Tel is invalid')
+      end
+      it 'telは全角数字では登録できない' do
+        @history_code.tel = '５４１７９８４０'
+        @history_code.valid?
+        expect(@history_code.errors.full_messages).to include('Tel is invalid')
+      end
+      it 'telは全角英数字混合では登録できない' do
+        @history_code.tel = '４３２ｇ７７７'
         @history_code.valid?
         expect(@history_code.errors.full_messages).to include('Tel is invalid')
       end
