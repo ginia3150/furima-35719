@@ -1,13 +1,12 @@
 class PurchaseHistorysController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :product_all, only: [:index, :create, :product_all]
   before_action :move_to_pay, only: [:index, :create]
   def index
     @history_code = HistoryCode.new
-    @product = Product.find(params[:product_id])
   end
 
   def create
-    @product = Product.find(params[:product_id])
     @history_code = HistoryCode.new(history_code_params)
     if @history_code.valid?
       pay_product
@@ -27,12 +26,15 @@ class PurchaseHistorysController < ApplicationController
   end
 
   def pay_product
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(amount: @product.price, card: history_code_params[:token], currency: 'jpy')
   end
 
   def move_to_pay
-    @product = Product.find(params[:product_id])
     redirect_to root_path if current_user.id == @product.user_id || @product.purchase_history.present?
+  end
+
+  def product_all
+    @product = Product.find(params[:product_id])
   end
 end
