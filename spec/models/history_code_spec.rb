@@ -85,6 +85,21 @@ RSpec.describe HistoryCode, type: :model do
         @history_code.valid?
         expect(@history_code.errors.full_messages).to include('Tel is invalid')
       end
+      it 'shipping_area_idが1では登録できない' do
+        @history_code.shipping_area_id = 1
+        @history_code.valid?
+        expect(@history_code.errors.full_messages).to include('Shipping area must be other than 1')
+      end
+      it 'user_idが存在しないと登録できない' do
+        @history_code.user_id = nil
+        @history_code.valid?
+        expect(@history_code.errors.full_messages).to include("User can't be blank")
+      end
+      it 'product_idが存在しないと登録できない' do
+        @history_code.product_id = nil
+        @history_code.valid?
+        expect(@history_code.errors.full_messages).to include("Product can't be blank")
+      end
     end
   end
 end
