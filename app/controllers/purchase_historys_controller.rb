@@ -1,6 +1,6 @@
 class PurchaseHistorysController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
-  before_action :product_all, only: [:index, :create, :product_all]
+  before_action :product_all, only: [:index, :create]
   before_action :move_to_pay, only: [:index, :create]
   def index
     @history_code = HistoryCode.new
