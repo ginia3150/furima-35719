@@ -18,8 +18,8 @@ RSpec.describe HistoryCode, type: :model do
         expect(@history_code).to be_valid
       end
     end
-  
-    context '購入不可'  do
+
+    context '購入不可' do
       it 'postal_codeが空だと購入できない' do
         @history_code.postal_code = ''
         @history_code.valid?
@@ -28,7 +28,7 @@ RSpec.describe HistoryCode, type: :model do
       it 'shipping_area_idが空だと購入できない' do
         @history_code.shipping_area_id = ''
         @history_code.valid?
-        expect(@history_code.errors.full_messages).to include("Shipping area is not a number")
+        expect(@history_code.errors.full_messages).to include('Shipping area is not a number')
       end
       it 'cityが空だと購入できない' do
         @history_code.city = ''
@@ -53,12 +53,12 @@ RSpec.describe HistoryCode, type: :model do
       it 'postal_codeにハイフンがないといけない' do
         @history_code.postal_code = '1231423'
         @history_code.valid?
-        expect(@history_code.errors.full_messages).to include("Postal code is invalid")
+        expect(@history_code.errors.full_messages).to include('Postal code is invalid')
       end
       it 'telは11桁以下でなければいけない' do
         @history_code.tel = '050123456789'
         @history_code.valid?
-        expect(@history_code.errors.full_messages).to include("Tel is invalid")
+        expect(@history_code.errors.full_messages).to include('Tel is invalid')
       end
     end
   end

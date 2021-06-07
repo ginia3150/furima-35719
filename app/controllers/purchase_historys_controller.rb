@@ -18,20 +18,21 @@ class PurchaseHistorysController < ApplicationController
     end
   end
 
-    private
-    def history_code_params
-      params.require(:history_code).permit(:postal_code, :shipping_area_id, :city, :address, :building_name, :tel).merge(user_id: current_user.id, product_id: params[:product_id], token: params[:token])
-    end
+  private
 
-    def pay_product
-      Payjp.api_key = "sk_test_57d0135be66ab5ab6e067ec9"
-      Payjp::Charge.create(amount: @product.price, card: history_code_params[:token], currency: 'jpy')
-    end
+  def history_code_params
+    params.require(:history_code).permit(:postal_code, :shipping_area_id, :city, :address, :building_name, :tel).merge(
+      user_id: current_user.id, product_id: params[:product_id], token: params[:token]
+    )
+  end
 
-    def move_to_pay
-      @product = Product.find(params[:product_id])
-      if current_user.id == @product.user_id || @product.purchase_history.present?
-        redirect_to root_path
-      end
-    end
+  def pay_product
+    Payjp.api_key = 'sk_test_57d0135be66ab5ab6e067ec9'
+    Payjp::Charge.create(amount: @product.price, card: history_code_params[:token], currency: 'jpy')
+  end
+
+  def move_to_pay
+    @product = Product.find(params[:product_id])
+    redirect_to root_path if current_user.id == @product.user_id || @product.purchase_history.present?
+  end
 end
